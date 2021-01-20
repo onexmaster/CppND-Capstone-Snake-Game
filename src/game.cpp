@@ -126,8 +126,8 @@ void Game::Update() {
     //Done: Once the snake eats the bonus food, its length reduces by 10% and the score remaines the same
     snake.ShrinkBody();
     //after eating the bonus set the bonus food co-ordinates to some big value untill a new value is not generated;
-    bonus_food.x = 32;
-    bonus_food.y = 32;
+    bonus_food.x = 33;
+    bonus_food.y = 33;
   }
 }
 

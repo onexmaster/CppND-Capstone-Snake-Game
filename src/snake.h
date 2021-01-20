@@ -2,8 +2,29 @@
 #define SNAKE_H
 
 #include <vector>
+#include <memory>
+#include <mutex>
 #include "SDL.h"
+//make a template
+template<class T>
+class SnakeBody{
+public:
+  //constructor
+  // SnakeBody();
 
+  // //Destructor
+  // ~SnakeBody();
+
+  //public Methods
+  void add(const T &msg);
+  void remove();
+  std::vector<T>getSnakeBody();
+
+private:
+    std::vector<T>body;
+    std::mutex _mutex;
+
+};
 class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
@@ -12,7 +33,9 @@ class Snake {
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(grid_width / 2),
-        head_y(grid_height / 2) {}
+        head_y(grid_height / 2) {
+          _body =std::make_shared<SnakeBody<SDL_Point>>();
+        }
 
   void Update();
 
@@ -31,9 +54,7 @@ class Snake {
   bool isAlive() const {return alive;}
   float getHeadX() const { return head_x;}
   float getHeadY() const {return head_y;}
-  const std::vector<SDL_Point>&getBody() const{return body;}
-
-  //This stores all the snake body parts
+  std::shared_ptr<SnakeBody<SDL_Point>> _body;
 
 
  private:
@@ -49,7 +70,7 @@ class Snake {
   bool alive{true};
   float head_x;
   float head_y;
-  std::vector<SDL_Point> body;
+
 };
 
 #endif

@@ -2,6 +2,35 @@
 #include <cmath>
 #include <iostream>
 
+//functions for the snakebody
+// template<class T>
+// SnakeBody<T>::SnakeBody()
+// {
+//   std::cout<<"constructor called"<<std::endl;
+// }
+// template<class T>
+// SnakeBody<T>::~SnakeBody()
+// {
+//   std::cout<<"Destructor called"<<std::endl;
+// }
+
+template<typename T>
+void SnakeBody<T>::remove(){
+  std::lock_guard<std::mutex>lock_guard(_mutex);
+  body.erase(body.begin());
+}
+template<typename T>
+  void SnakeBody<T>::add(const T &msg) {
+      std::lock_guard<std::mutex> lock_guard(_mutex);
+      body.push_back(msg);
+  }
+
+  template<typename T>
+  std::vector<T> SnakeBody<T>::getSnakeBody() {
+      return body;
+  }
+
+
 void Snake::Update() {
   SDL_Point prev_cell{
       static_cast<int>(head_x),
@@ -45,11 +74,11 @@ void Snake::UpdateHead() {
 
 void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
   // Add previous head location to vector
-  body.push_back(prev_head_cell);
+  _body->add(prev_head_cell);
 
   if (!growing) {
     // Remove the tail from the vector.
-    body.erase(body.begin());
+    _body->remove();
   } else {
     growing = false;
     size++;
@@ -61,13 +90,13 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
     std::cout<<"Bonus Eaten: reduce size by "<<dec<<std::endl;
     for(int i=0;i<dec;i++)
     {
-      body.erase(body.begin());
+    _body->remove();
       size--;
     }
     eat_bonus=false;
   }
   // Check if the snake has died.
-  for (auto const &item : body) {
+  for (auto const &item : _body->getSnakeBody()) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
       alive = false;
     }
@@ -86,7 +115,7 @@ bool Snake::SnakeCell(int x, int y) {
   if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
     return true;
   }
-  for (auto const &item : body) {
+  for (auto const &item : _body->getSnakeBody()) {
     if (x == item.x && y == item.y) {
       return true;
     }
