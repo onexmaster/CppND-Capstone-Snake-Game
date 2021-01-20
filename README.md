@@ -6,7 +6,13 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 
 The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+## Features Added
+* Added a "Bonus Food Item" indicated by Green Color. If this Food is eaten by the snake, the size of the snake reduces by 10% of the current size.
+* Added Functionality to Exit the game using "ESC" button.
+* Reduced the Rate of Change of Snake Speed, to make game more playable for much longer amount time.
+* Normalize the Speed of the Snake once the size becomes a multiple of 20.
+* Integrated Smart Pointers in the Project for the snake body.
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -29,3 +35,24 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## Rubrics Addressed
+
+1. README(All Rubrics Points Addressed)
+2. Compiling and Testing (All Rubric Points Addressed)
+3. Loops, Functions, I/O
+  * The project demonstrates an understanding of C++ functions and control structures.
+  * The project accepts user input and processes the input.(controller.cpp ->line 12-40)
+4. Object Oriented Programming
+  * The project uses Object Oriented Programming techniques.
+  * Classes use appropriate access specifiers for class members(snake.h and snake.cpp).
+  * Class constructors utilize member initialization lists.
+  * Classes abstract implementation details from their interfaces(ShrinkBody and GrowBody functions in game.cpp ).
+  * Classes encapsulate behavior.
+  * Overloaded functions allow the same function to operate on different parameters(render.cpp ->line 78 ).
+  * Templates generalize functions in the project(SnakeBody class in snake.cpp ->line 5).
+5. Memory Management
+  * The project makes use of references in function declarations.
+  * The project uses smart pointers instead of raw pointers(snake.h ->line 57).
+6. Concurrency
+  * A mutex or lock is used in the project(snake.cpp ->line 19 and 24).
