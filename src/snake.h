@@ -40,6 +40,7 @@ class Snake {
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   bool growing{false};
+  bool eat_bonus{false};
   int grid_width;
   int grid_height;
   float speed{0.1f};

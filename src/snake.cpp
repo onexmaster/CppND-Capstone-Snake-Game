@@ -54,7 +54,18 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
     growing = false;
     size++;
   }
-
+  //if bonus eaten
+  if(eat_bonus)
+  {
+    int dec=size*0.1;
+    std::cout<<"Bonus Eaten: reduce size by "<<dec<<std::endl;
+    for(int i=0;i<dec;i++)
+    {
+      body.erase(body.begin());
+      size--;
+    }
+    eat_bonus=false;
+  }
   // Check if the snake has died.
   for (auto const &item : body) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
@@ -67,12 +78,7 @@ void Snake::GrowBody() { growing = true; }
 
 void Snake::ShrinkBody()
 {
-  //Decrease the size of snake by 10%
-  int dec=0.1*size;
-  for(int i=0;i<dec;i++)
-    body.erase(body.begin());
-  //decrease the size by the amout of pixels removed
-  size-=dec;
+  eat_bonus=true;
 }
 
 // Inefficient method to check if cell is occupied by snake.
