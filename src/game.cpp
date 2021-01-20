@@ -89,8 +89,7 @@ void Game::PlaceBonusFood() {
     }
   }
 }
-
-//Update the game Update function to include the bonus food item as well
+//Update function to update the game state
 void Game::Update() {
   if (!snake.isAlive()) return;
 
@@ -120,14 +119,15 @@ void Game::Update() {
       snake.setSpeed(new_speed);
     }
   }
+  //perform the same checks for the bonus food as well
   if (bonus_food.x == new_x && bonus_food.y == new_y) {
     //the snake eats the bonus food
     bonus=false;
     //Done: Once the snake eats the bonus food, its length reduces by 10% and the score remaines the same
     snake.ShrinkBody();
     //after eating the bonus set the bonus food co-ordinates to some big value untill a new value is not generated;
-    bonus_food.x = 33;
-    bonus_food.y = 33;
+    bonus_food.x = 1000;
+    bonus_food.y = 1000;
   }
 }
 

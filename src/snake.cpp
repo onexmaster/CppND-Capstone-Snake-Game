@@ -3,16 +3,6 @@
 #include <iostream>
 
 //functions for the snakebody
-// template<class T>
-// SnakeBody<T>::SnakeBody()
-// {
-//   std::cout<<"constructor called"<<std::endl;
-// }
-// template<class T>
-// SnakeBody<T>::~SnakeBody()
-// {
-//   std::cout<<"Destructor called"<<std::endl;
-// }
 
 template<typename T>
 void SnakeBody<T>::remove(){
@@ -87,10 +77,10 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   if(eat_bonus)
   {
     int dec=size*0.1;
-    std::cout<<"Bonus Eaten: reduce size by "<<dec<<std::endl;
     for(int i=0;i<dec;i++)
     {
-    _body->remove();
+      //remove the elemets from the tail of the vector
+      _body->remove();
       size--;
     }
     eat_bonus=false;
