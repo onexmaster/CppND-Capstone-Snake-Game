@@ -111,6 +111,14 @@ void Game::Update() {
     float curr_speed=snake.getSpeed();
     float new_speed=curr_speed+0.01;
     snake.setSpeed(new_speed);
+    //normalise the speed at every interval
+    if(score%20==0)
+    {
+      float curr_speed=snake.getSpeed();
+      //make the speed 80% of the original _speed
+      float new_speed=curr_speed*0.80;
+      snake.setSpeed(new_speed);
+    }
   }
   if (bonus_food.x == new_x && bonus_food.y == new_y) {
     //the snake eats the bonus food
