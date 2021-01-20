@@ -31,9 +31,10 @@ class Snake {
   bool isAlive() const {return alive;}
   float getHeadX() const { return head_x;}
   float getHeadY() const {return head_y;}
+  const std::vector<SDL_Point>&getBody() const{return body;}
+
   //This stores all the snake body parts
-  //check if this can be changed to a unique ptr
-  std::vector<SDL_Point> body;
+
 
  private:
   void UpdateHead();
@@ -48,6 +49,7 @@ class Snake {
   bool alive{true};
   float head_x;
   float head_y;
+  std::vector<SDL_Point> body;
 };
 
 #endif
