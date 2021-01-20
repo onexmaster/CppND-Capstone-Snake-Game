@@ -28,6 +28,7 @@ class Snake {
   bool alive{true};
   float head_x;
   float head_y;
+  //This stores all the snake body parts
   std::vector<SDL_Point> body;
 
  private:
