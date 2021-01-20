@@ -92,12 +92,12 @@ void Game::PlaceBonusFood() {
 
 //Update the game Update function to include the bonus food item as well
 void Game::Update() {
-  if (!snake.alive) return;
+  if (!snake.isAlive()) return;
 
   snake.Update();
 
-  int new_x = static_cast<int>(snake.head_x);
-  int new_y = static_cast<int>(snake.head_y);
+  int new_x = static_cast<int>(snake.getHeadX());
+  int new_y = static_cast<int>(snake.getHeadY());
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
@@ -107,17 +107,20 @@ void Game::Update() {
       PlaceBonusFood();
     // Grow snake and increase speed.
     snake.GrowBody();
-    snake.speed += 0.02;
+    //reduce the growth speed
+    float curr_speed=snake.getSpeed();
+    float new_speed=curr_speed+0.01;
+    snake.setSpeed(new_speed);
   }
-  //For now micmic the Normal food item
   if (bonus_food.x == new_x && bonus_food.y == new_y) {
     //the snake eats the bonus food
     bonus=false;
+
+    //Done: Once the snake eats the bonus food, its length reduces by 10% and the score remaines the same
     snake.ShrinkBody();
-    //TODO: Once the snake eats the bonus food, its length reduces by 10% and the score remaines the same
     //PlaceBonusFood();
   }
 }
 
 int Game::GetScore() const { return score; }
-int Game::GetSize() const { return snake.size; }
+int Game::GetSize() const { return snake.getSize(); }

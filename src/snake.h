@@ -23,12 +23,16 @@ class Snake {
 
   Direction direction = Direction::kUp;
 
-  float speed{0.1f};
-  int size{1};
-  bool alive{true};
-  float head_x;
-  float head_y;
+  //Add Getter/setter for the snake class
+  float getSpeed() const { return speed;}
+  void setSpeed(float _speed) { speed=_speed;}
+  float getSize()const {return size;}
+  void setSize(int _sz) { size=_sz;}
+  bool isAlive() const {return alive;}
+  float getHeadX() const { return head_x;}
+  float getHeadY() const {return head_y;}
   //This stores all the snake body parts
+  //check if this can be changed to a unique ptr
   std::vector<SDL_Point> body;
 
  private:
@@ -38,6 +42,11 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
+  float speed{0.1f};
+  int size{1};
+  bool alive{true};
+  float head_x;
+  float head_y;
 };
 
 #endif
